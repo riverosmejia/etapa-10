@@ -80,6 +80,19 @@ int safeInput() {
     return number;
 }
 
+void deleteTree(TreeNode* root) {
+    if (root == nullptr) {
+        return;
+    }
+    
+    // Primero, eliminar los subárboles izquierdo y derecho
+    deleteTree(root->left);
+    deleteTree(root->right);
+
+    // Luego, eliminar el nodo actual
+    delete root;
+}
+
 // Función para dibujar el árbol en orden
 void display(TreeNode* root) {
     if (root != nullptr) {
@@ -172,8 +185,8 @@ int main() {
         }
     } while (choice != 4);
 
-    // Liberar la memoria del árbol
-    // (No se muestra en este ejemplo, pero es importante hacerlo)
+    deleteTree(root);
+    root = nullptr;
 
     return 0;
 }
